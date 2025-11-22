@@ -1,9 +1,9 @@
-import searchIcon from "../assets/images/icon-search.svg";
+import IconSearch from "../assets/SVG/IconSearch";
 
 export default function Search() {
   return (
-    <div className="w-[320px] bg-neutral-100 rounded-md flex relative p-3 gap-2">
-      <img src={searchIcon} className="h-5" />
+    <div className="w-[320px] bg-neutral-100 rounded-lg flex relative p-3 gap-2">
+      <IconSearch className="h-5" />
       <input className="w-full" placeholder="Search by title..." />
     </div>
   );
