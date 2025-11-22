@@ -1,10 +1,6 @@
-import { useState } from "react";
-import data from "./data.json";
 import Sidebar from "./nav/Sidebar";
 
 function App() {
-  const [bookmarks, setBookmarks] = useState(data.bookmarks);
-
   return (
     <div className="grid grid-cols-[296px_1fr] font-sans">
       <Sidebar />
