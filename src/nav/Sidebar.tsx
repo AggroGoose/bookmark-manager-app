@@ -3,7 +3,7 @@ import NavLogo from "./NavLogo";
 
 export default function Sidebar() {
   return (
-    <div className="w-[296px] h-screen flex flex-col gap-4 fixed">
+    <div className="w-[296px] h-screen flex flex-col gap-4 fixed border-r border-neutral-200">
       <NavLogo />
       <NavButtons />
     </div>
