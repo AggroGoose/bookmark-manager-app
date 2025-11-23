@@ -1,8 +1,8 @@
 import IconCreated from "../assets/SVG/IconCreated";
 import IconLastVisited from "../assets/SVG/IconLastVisited";
-import IconMenuBookmark from "../assets/SVG/IconMenuBookmark";
 import IconPin from "../assets/SVG/IconPin";
 import IconVisitCount from "../assets/SVG/IconVisitCount";
+import BookmarkMenu from "./BookmarkMenu";
 import dateFormatter from "./util/dateFormatter";
 
 export default function BookmarkCard({
@@ -49,9 +49,7 @@ export default function BookmarkCard({
               </p>
             </div>
           </div>
-          <button className="p-1.5 border border-neutral-300 rounded-lg max-h-max">
-            <IconMenuBookmark className="h-5 aspect-square" />
-          </button>
+          <BookmarkMenu bookmark={bookmark} />
         </div>
         <hr className="border-neutral-300" />
         <p className="font-medium text-sm">{bookmark.description}</p>
