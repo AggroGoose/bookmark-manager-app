@@ -90,6 +90,30 @@ const bookmarkSlice = createSlice({
       }
       bookmarkSlice.caseReducers.sortItems(state);
     },
+    filterArchive(state) {
+      let bookmarkArray = [];
+      if (state.showArchived) {
+        bookmarkArray = state.allBookmarks.filter(
+          (bookmark) => bookmark.isArchived
+        );
+      } else {
+        bookmarkArray = state.allBookmarks.filter(
+          (bookmark) => !bookmark.isArchived
+        );
+      }
+
+      state.filteredBookmarks = [...bookmarkArray];
+    },
+    toggleArchive(state, action) {
+      if (action.payload) {
+        state.showArchived = true;
+      } else {
+        state.showArchived = false;
+      }
+
+      bookmarkSlice.caseReducers.filterArchive(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
   },
 });
 
