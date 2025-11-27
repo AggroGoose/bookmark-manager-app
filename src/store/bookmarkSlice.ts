@@ -33,12 +33,65 @@ const bookmarkInitialState = {
   filtersApplied,
   filters: filterArray,
   showArchived: false,
+  sortMethod: "ra",
 };
 
 const bookmarkSlice = createSlice({
   name: "bookmarks",
   initialState: bookmarkInitialState,
-  reducers: {},
+  reducers: {
+    sortItems(state) {
+      const sortItems = state.filteredBookmarks;
+      const pinnedItems = sortItems.filter((bookmark) => bookmark.pinned);
+      const unpinnedItems = sortItems.filter((bookmark) => !bookmark.pinned);
+
+      if (state.sortMethod == "ra") {
+        pinnedItems.sort((a, b) => {
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        });
+        unpinnedItems.sort((a, b) => {
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        });
+      } else if (state.sortMethod == "rv") {
+        pinnedItems.sort((a, b) => {
+          return (
+            new Date(b.lastVisited || 0).getTime() -
+            new Date(a.lastVisited || 0).getTime()
+          );
+        });
+        unpinnedItems.sort((a, b) => {
+          return (
+            new Date(b.lastVisited || 0).getTime() -
+            new Date(a.lastVisited || 0).getTime()
+          );
+        });
+      } else if (state.sortMethod == "mv") {
+        pinnedItems.sort((a, b) => {
+          return b.visitCount - a.visitCount;
+        });
+        unpinnedItems.sort((a, b) => {
+          return b.visitCount - a.visitCount;
+        });
+      }
+
+      state.filteredBookmarks = [...pinnedItems, ...unpinnedItems];
+    },
+    changeSort(state, action) {
+      if (action.payload == "ra") {
+        state.sortMethod = "ra";
+      } else if (action.payload == "rv") {
+        state.sortMethod = "rv";
+      } else if (action.payload == "mv") {
+        state.sortMethod = "mv";
+      }
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
+  },
 });
 
+export const bookmarkActions = bookmarkSlice.actions;
 export default bookmarkSlice;
