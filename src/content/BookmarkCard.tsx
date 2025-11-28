@@ -2,6 +2,7 @@ import IconCreated from "../assets/SVG/IconCreated";
 import IconLastVisited from "../assets/SVG/IconLastVisited";
 import IconPin from "../assets/SVG/IconPin";
 import IconVisitCount from "../assets/SVG/IconVisitCount";
+import BookmarkArchiveMenu from "./BookmarkArchiveMenu";
 import BookmarkMenu from "./BookmarkMenu";
 import dateFormatter from "./util/dateFormatter";
 
@@ -49,7 +50,11 @@ export default function BookmarkCard({
               </p>
             </div>
           </div>
-          <BookmarkMenu bookmark={bookmark} />
+          {bookmark.isArchived ? (
+            <BookmarkArchiveMenu bookmark={bookmark} />
+          ) : (
+            <BookmarkMenu bookmark={bookmark} />
+          )}
         </div>
         <hr className="border-neutral-300" />
         <p className="font-medium text-sm">{bookmark.description}</p>
@@ -61,7 +66,7 @@ export default function BookmarkCard({
           ))}
         </div>
       </div>
-      <div className="p-4 flex w-full gap-4 border-t border-neutral-300">
+      <div className="p-4 flex w-full gap-4 border-t border-neutral-300 items-center">
         <div className="flex gap-0.5 items-center">
           <IconVisitCount className="h-3" />
           <p className="font-medium text-sm">{bookmark.visitCount}</p>
@@ -78,7 +83,14 @@ export default function BookmarkCard({
             {dateFormatter(bookmark.createdAt)}
           </p>
         </div>
-        {bookmark.pinned && <IconPin className="h-4 ml-auto" />}
+        {bookmark.pinned && !bookmark.isArchived && (
+          <IconPin className="h-4 ml-auto" />
+        )}
+        {bookmark.isArchived && (
+          <p className="text-xs font-medium px-1.5 bg-neutral-100 rounded-md ml-auto">
+            Archived
+          </p>
+        )}
       </div>
     </div>
   );

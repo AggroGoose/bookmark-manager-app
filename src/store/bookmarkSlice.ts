@@ -88,7 +88,7 @@ const bookmarkSlice = createSlice({
 
       state.filteredBookmarks = [...bookmarkArray];
     },
-    toggleArchive(state, action) {
+    toggleShowArchive(state, action) {
       if (action.payload) {
         state.showArchived = true;
       } else {
@@ -127,6 +127,30 @@ const bookmarkSlice = createSlice({
           (item) => item !== action.payload
         );
         state.filtersApplied = [...filterList];
+      }
+
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
+    togglePin(state, action) {
+      if (typeof action.payload === "number") {
+        const index = state.allBookmarks.findIndex(
+          (item) => item.id === action.payload
+        );
+        state.allBookmarks[index].pinned = !state.allBookmarks[index].pinned;
+      }
+
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
+    toggleArchive(state, action) {
+      if (typeof action.payload === "number") {
+        const index = state.allBookmarks.findIndex(
+          (item) => item.id === action.payload
+        );
+        state.allBookmarks[index].isArchived =
+          !state.allBookmarks[index].isArchived;
+        state.allBookmarks[index].pinned = false;
       }
 
       bookmarkSlice.caseReducers.filteritems(state);

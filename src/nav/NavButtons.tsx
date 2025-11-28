@@ -9,14 +9,14 @@ export default function NavButtons() {
     <nav className="px-4">
       <button
         className="flex gap-2 items-center px-3 py-2 w-full rounded-md hover:bg-neutral-100"
-        onClick={() => dispatch(bookmarkActions.toggleArchive(false))}
+        onClick={() => dispatch(bookmarkActions.toggleShowArchive(false))}
       >
         <IconHome className="h-5" />
         <p className="font-semibold">Home</p>
       </button>
       <button
         className="flex gap-2 items-center px-3 py-2 w-full rounded-md hover:bg-neutral-100"
-        onClick={() => dispatch(bookmarkActions.toggleArchive(true))}
+        onClick={() => dispatch(bookmarkActions.toggleShowArchive(true))}
       >
         <IconArchive className="h-5" />
         <p className="font-semibold">Archived</p>

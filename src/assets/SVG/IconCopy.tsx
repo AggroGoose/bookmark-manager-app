@@ -16,7 +16,7 @@ export default function IconCopy({
     >
       <g clip-path="url(#a)">
         <path
-          stroke="#currentColor"
+          stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="1.6"
