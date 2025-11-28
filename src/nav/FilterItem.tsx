@@ -1,5 +1,7 @@
 import { Checkbox } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../hooks";
+import { bookmarkActions } from "../store/bookmarkSlice";
 
 export default function FilterItem({
   filter,
@@ -10,6 +12,15 @@ export default function FilterItem({
   };
 }) {
   const [enabled, setEnabled] = useState(false);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (enabled) {
+      dispatch(bookmarkActions.addFilter(filter.key));
+    } else {
+      dispatch(bookmarkActions.removeFilter(filter.key));
+    }
+  }, [enabled, dispatch, filter.key]);
   return (
     <div className="flex gap-2 items-center px-3 py-2">
       <Checkbox

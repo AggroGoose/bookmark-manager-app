@@ -2,36 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import data from "./data.json";
 
 const filtersApplied: Array<string> = [];
-const filterMap: Map<string, number> = new Map();
 const unarchivedArray = data.bookmarks.filter(
   (bookmark) => !bookmark.isArchived
 );
-
-for (const bookmark of unarchivedArray) {
-  for (const tag of bookmark.tags) {
-    if (filterMap.has(tag)) {
-      filterMap.set(tag, filterMap.get(tag)! + 1);
-    } else {
-      filterMap.set(tag, 1);
-    }
-  }
-}
 
 const pinnedBookmarks = unarchivedArray.filter((bookmark) => bookmark.pinned);
 const unpinnedBookmarks = unarchivedArray.filter(
   (bookmark) => !bookmark.pinned
 );
 
-const filterArray = Array.from(filterMap, ([key, value]) => ({ key, value }));
-
-filterArray.sort((a, b) => a.key.localeCompare(b.key));
-
 const bookmarkInitialState = {
   allBookmarks: data.bookmarks,
   filteredBookmarks: [...pinnedBookmarks, ...unpinnedBookmarks],
   nextId: data.bookmarks.length + 1,
   filtersApplied,
-  filters: filterArray,
   showArchived: false,
   sortMethod: "ra",
 };
@@ -111,7 +95,41 @@ const bookmarkSlice = createSlice({
         state.showArchived = false;
       }
 
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
+    filteritems(state) {
       bookmarkSlice.caseReducers.filterArchive(state);
+      if (state.filtersApplied.length > 0) {
+        const newArray = state.filteredBookmarks.filter((bookmark) =>
+          state.filtersApplied.every((tag) => bookmark.tags.includes(tag))
+        );
+
+        state.filteredBookmarks = [...newArray];
+      }
+    },
+    addFilter(state, action) {
+      if (
+        !state.filtersApplied.includes(action.payload) &&
+        typeof action.payload === "string"
+      ) {
+        const filterList = state.filtersApplied;
+        filterList.push(action.payload);
+        state.filtersApplied = [...filterList];
+      }
+
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
+    removeFilter(state, action) {
+      if (typeof action.payload === "string") {
+        const filterList = state.filtersApplied.filter(
+          (item) => item !== action.payload
+        );
+        state.filtersApplied = [...filterList];
+      }
+
+      bookmarkSlice.caseReducers.filteritems(state);
       bookmarkSlice.caseReducers.sortItems(state);
     },
   },
