@@ -231,6 +231,17 @@ const bookmarkSlice = createSlice({
       bookmarkSlice.caseReducers.filteritems(state);
       bookmarkSlice.caseReducers.sortItems(state);
     },
+    searchBookmarks(state, action) {
+      if (typeof action.payload === "string" && action.payload.length > 0) {
+        console.log(action.payload.toLowerCase());
+        const searchArray = state.allBookmarks.filter((bookmark) => {
+          return bookmark.title
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
+        });
+        state.filteredBookmarks = [...searchArray];
+      }
+    },
   },
 });
 
