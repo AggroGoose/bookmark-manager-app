@@ -156,6 +156,16 @@ const bookmarkSlice = createSlice({
       bookmarkSlice.caseReducers.filteritems(state);
       bookmarkSlice.caseReducers.sortItems(state);
     },
+    deleteBookmark(state, action) {
+      if (typeof action.payload === "number") {
+        const newItems = state.allBookmarks.filter(
+          (item) => item.id !== action.payload
+        );
+        state.allBookmarks = [...newItems];
+      }
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
   },
 });
 

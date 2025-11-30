@@ -1,3 +1,4 @@
+import { useState } from "react";
 import IconCreated from "../assets/SVG/IconCreated";
 import IconLastVisited from "../assets/SVG/IconLastVisited";
 import IconPin from "../assets/SVG/IconPin";
@@ -5,6 +6,9 @@ import IconVisitCount from "../assets/SVG/IconVisitCount";
 import BookmarkArchiveMenu from "./BookmarkArchiveMenu";
 import BookmarkMenu from "./BookmarkMenu";
 import dateFormatter from "./util/dateFormatter";
+import DeleteModal from "./modals/DeleteModal";
+import ArchiveModal from "./modals/ArchiveModal";
+import UnarchiveModal from "./modals/UnarchiveModal";
 
 export default function BookmarkCard({
   bookmark,
@@ -37,6 +41,10 @@ export default function BookmarkCard({
         lastVisited: null;
       };
 }) {
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(false);
+  const [unarchiveOpen, setUnarchiveOpen] = useState(false);
+
   return (
     <div className="w-full bg-white rounded-lg flex flex-col">
       <div className="flex flex-col gap-4 p-4 grow">
@@ -51,9 +59,13 @@ export default function BookmarkCard({
             </div>
           </div>
           {bookmark.isArchived ? (
-            <BookmarkArchiveMenu bookmark={bookmark} />
+            <BookmarkArchiveMenu
+              bookmark={bookmark}
+              setDeleteOpen={setDeleteOpen}
+              setUnarchiveOpen={setUnarchiveOpen}
+            />
           ) : (
-            <BookmarkMenu bookmark={bookmark} />
+            <BookmarkMenu bookmark={bookmark} setArchiveOpen={setArchiveOpen} />
           )}
         </div>
         <hr className="border-neutral-300" />
@@ -92,6 +104,21 @@ export default function BookmarkCard({
           </p>
         )}
       </div>
+      <ArchiveModal
+        archiveOpen={archiveOpen}
+        setArchiveOpen={setArchiveOpen}
+        id={bookmark.id}
+      />
+      <DeleteModal
+        deleteOpen={deleteOpen}
+        setDeleteOpen={setDeleteOpen}
+        id={bookmark.id}
+      />
+      <UnarchiveModal
+        unarchiveOpen={unarchiveOpen}
+        setUnarchiveOpen={setUnarchiveOpen}
+        id={bookmark.id}
+      />
     </div>
   );
 }

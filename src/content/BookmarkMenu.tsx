@@ -10,6 +10,7 @@ import { bookmarkActions } from "../store/bookmarkSlice";
 
 export default function BookmarkMenu({
   bookmark,
+  setArchiveOpen,
 }: {
   bookmark:
     | {
@@ -38,6 +39,7 @@ export default function BookmarkMenu({
         createdAt: string;
         lastVisited: null;
       };
+  setArchiveOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const dispatch = useAppDispatch();
   const handlePin = () => {
@@ -105,7 +107,7 @@ export default function BookmarkMenu({
         <MenuItem>
           <button
             className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
-            onClick={() => dispatch(bookmarkActions.toggleArchive(bookmark.id))}
+            onClick={() => setArchiveOpen(true)}
           >
             <IconArchive className="h-4" />
             <p className="font-semibold text-sm">Archive</p>

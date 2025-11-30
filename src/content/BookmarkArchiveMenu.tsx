@@ -4,11 +4,11 @@ import IconVisit from "../assets/SVG/IconVisit";
 import IconCopy from "../assets/SVG/IconCopy";
 import IconUnarchive from "../assets/SVG/IconUnarchive";
 import IconDelete from "../assets/SVG/IconDelete";
-import { useAppDispatch } from "../hooks";
-import { bookmarkActions } from "../store/bookmarkSlice";
 
 export default function BookmarkArchiveMenu({
   bookmark,
+  setDeleteOpen,
+  setUnarchiveOpen,
 }: {
   bookmark:
     | {
@@ -37,14 +37,15 @@ export default function BookmarkArchiveMenu({
         createdAt: string;
         lastVisited: null;
       };
+  setDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setUnarchiveOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const dispatch = useAppDispatch();
   const handleCopy = async () => {
     await navigator.clipboard.writeText(bookmark.url);
   };
   return (
     <Menu>
-      <MenuButton className="p-1.5 border border-neutral-300 rounded-lg max-h-max">
+      <MenuButton className="p-1.5 border border-neutral-300 rounded-lg max-h-max hover:cursor-pointer hover:bg-neutral-100">
         <IconMenuBookmark className="h-5 aspect-square" />
       </MenuButton>
       <MenuItems
@@ -55,7 +56,7 @@ export default function BookmarkArchiveMenu({
           <a
             href={bookmark.url}
             target="_blank"
-            className="flex p-2 items-center gap-2.5 w-full rounded-lg hover:bg-neutral-100"
+            className="flex py-2 items-center gap-2.5 w-full rounded-lg hover:bg-neutral-100"
           >
             <IconVisit className="h-4" />
             <p className="font-semibold text-sm">Visit</p>
@@ -73,17 +74,20 @@ export default function BookmarkArchiveMenu({
         <MenuItem>
           <button
             className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
-            onClick={() => dispatch(bookmarkActions.toggleArchive(bookmark.id))}
+            onClick={() => setUnarchiveOpen(true)}
           >
             <IconUnarchive className="h-4" />
             <p className="font-semibold text-sm">Unarchive</p>
           </button>
         </MenuItem>
         <MenuItem>
-          <div className="flex py-2 items-center gap-2.5">
+          <button
+            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+            onClick={() => setDeleteOpen(true)}
+          >
             <IconDelete className="h-4" />
             <p className="font-semibold text-sm">Delete Permanently</p>
-          </div>
+          </button>
         </MenuItem>
       </MenuItems>
     </Menu>
