@@ -1,6 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 import data from "./data.json";
 
+type Bookmark =
+  | {
+      id: number;
+      title: string;
+      url: string;
+      favicon: string;
+      description: string;
+      tags: string[];
+      pinned: boolean;
+      isArchived: boolean;
+      visitCount: number;
+      createdAt: string;
+      lastVisited: string;
+    }
+  | {
+      id: number;
+      title: string;
+      url: string;
+      favicon: string;
+      description: string;
+      tags: string[];
+      pinned: boolean;
+      isArchived: boolean;
+      visitCount: number;
+      createdAt: string;
+      lastVisited: null;
+    };
+
 const filtersApplied: Array<string> = [];
 const unarchivedArray = data.bookmarks.filter(
   (bookmark) => !bookmark.isArchived
@@ -163,6 +191,29 @@ const bookmarkSlice = createSlice({
         );
         state.allBookmarks = [...newItems];
       }
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
+    addBookmark(state, action) {
+      if (typeof action.payload === "object") {
+        const a = action.payload;
+        const newBookmark: Bookmark = {
+          id: state.nextId,
+          createdAt: new Date().toDateString(),
+          description: a.description,
+          favicon: "/src/assets/images/favicon-frontend-mentor.png",
+          isArchived: false,
+          lastVisited: null,
+          pinned: false,
+          tags: a.tags,
+          url: a.url,
+          title: a.title,
+          visitCount: 0,
+        };
+        state.nextId = state.nextId + 1;
+        state.allBookmarks = [...state.allBookmarks, newBookmark];
+      }
+
       bookmarkSlice.caseReducers.filteritems(state);
       bookmarkSlice.caseReducers.sortItems(state);
     },

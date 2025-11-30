@@ -5,9 +5,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useRef, useState } from "react";
-import IconAdd from "../assets/SVG/IconAdd";
-import { useAppDispatch } from "../hooks";
-import { bookmarkActions } from "../store/bookmarkSlice";
+import IconAdd from "../../assets/SVG/IconAdd";
+import { useAppDispatch } from "../../hooks";
+import { bookmarkActions } from "../../store/bookmarkSlice";
 
 export default function AddBookmark() {
   const [isOpen, setIsOpen] = useState(false);
