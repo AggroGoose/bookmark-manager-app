@@ -11,6 +11,7 @@ import { bookmarkActions } from "../store/bookmarkSlice";
 export default function BookmarkMenu({
   bookmark,
   setArchiveOpen,
+  setEditOpen,
 }: {
   bookmark:
     | {
@@ -40,6 +41,7 @@ export default function BookmarkMenu({
         lastVisited: null;
       };
   setArchiveOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const dispatch = useAppDispatch();
   const handlePin = () => {
@@ -99,10 +101,13 @@ export default function BookmarkMenu({
           </MenuItem>
         )}
         <MenuItem>
-          <div className="flex py-2 items-center gap-2.5">
+          <button
+            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+            onClick={() => setEditOpen(true)}
+          >
             <IconEdit className="h-4" bg="#fff" />
             <p className="font-semibold text-sm">Edit</p>
-          </div>
+          </button>
         </MenuItem>
         <MenuItem>
           <button

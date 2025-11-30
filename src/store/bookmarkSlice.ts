@@ -217,6 +217,20 @@ const bookmarkSlice = createSlice({
       bookmarkSlice.caseReducers.filteritems(state);
       bookmarkSlice.caseReducers.sortItems(state);
     },
+    editBookmark(state, action) {
+      if (typeof action.payload === "object") {
+        const index = state.allBookmarks.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.allBookmarks[index].title = action.payload.title;
+        state.allBookmarks[index].url = action.payload.url;
+        state.allBookmarks[index].description = action.payload.description;
+        state.allBookmarks[index].tags = action.payload.tags;
+      }
+
+      bookmarkSlice.caseReducers.filteritems(state);
+      bookmarkSlice.caseReducers.sortItems(state);
+    },
   },
 });
 

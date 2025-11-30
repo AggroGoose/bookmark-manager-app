@@ -116,13 +116,13 @@ export default function AddBookmark() {
               <div className="flex gap-4 mt-3 self-end">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="font-semibold px-4 py-3 border border-neutral-300 rounded-lg"
+                  className="font-semibold px-4 py-3 border border-neutral-300 hover:bg-neutral-300 hover:cursor-pointer rounded-lg"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="font-semibold px-4 py-3 bg-neutral-800 text-white rounded-lg"
+                  className="font-semibold px-4 py-3 text-white bg-teal-800 hover:bg-teal-950 hover:cursor-pointer rounded-lg"
                 >
                   Add Bookmark
                 </button>

@@ -9,6 +9,7 @@ import dateFormatter from "./util/dateFormatter";
 import DeleteModal from "./modals/DeleteModal";
 import ArchiveModal from "./modals/ArchiveModal";
 import UnarchiveModal from "./modals/UnarchiveModal";
+import EditModal from "./modals/EditModal";
 
 export default function BookmarkCard({
   bookmark,
@@ -41,8 +42,9 @@ export default function BookmarkCard({
         lastVisited: null;
       };
 }) {
-  const [deleteOpen, setDeleteOpen] = useState(false);
   const [archiveOpen, setArchiveOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [unarchiveOpen, setUnarchiveOpen] = useState(false);
 
   return (
@@ -65,7 +67,11 @@ export default function BookmarkCard({
               setUnarchiveOpen={setUnarchiveOpen}
             />
           ) : (
-            <BookmarkMenu bookmark={bookmark} setArchiveOpen={setArchiveOpen} />
+            <BookmarkMenu
+              bookmark={bookmark}
+              setArchiveOpen={setArchiveOpen}
+              setEditOpen={setEditOpen}
+            />
           )}
         </div>
         <hr className="border-neutral-300" />
@@ -113,6 +119,11 @@ export default function BookmarkCard({
         deleteOpen={deleteOpen}
         setDeleteOpen={setDeleteOpen}
         id={bookmark.id}
+      />
+      <EditModal
+        bookmark={bookmark}
+        editOpen={editOpen}
+        setEditOpen={setEditOpen}
       />
       <UnarchiveModal
         unarchiveOpen={unarchiveOpen}
