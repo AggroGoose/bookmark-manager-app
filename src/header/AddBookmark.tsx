@@ -9,7 +9,7 @@ import IconAdd from "../assets/SVG/IconAdd";
 import { useAppDispatch } from "../hooks";
 import { bookmarkActions } from "../store/bookmarkSlice";
 
-export default function AddBookmark() {
+export default function AddBookmark({ isLight }: { isLight: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState("");
   const titleRef = useRef<HTMLInputElement>(null);
@@ -34,7 +34,7 @@ export default function AddBookmark() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex gap-1 items-center text-white bg-teal-950 font-semibold px-4 py-3 rounded-lg hover:cursor-pointer hover:drop-shadow-lg hover:bg-teal-800"
+        className="flex gap-1 items-center text-white bg-teal-950 dark:bg-teal-800 font-semibold px-4 py-3 rounded-lg hover:cursor-pointer hover:drop-shadow-lg hover:bg-teal-800"
       >
         <IconAdd className="h-5" />
         <p className="">Add Bookmark</p>
@@ -42,10 +42,10 @@ export default function AddBookmark() {
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
-        className="relative z-50"
+        className={`relative z-50${isLight ? "" : " dark"}`}
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-neutral-800/80">
-          <DialogPanel className="max-w-[570px] space-y-4 border bg-white p-8 rounded-lg">
+          <DialogPanel className="max-w-[570px] space-y-4 border bg-white dark:bg-neutral-800 dark:text-white p-8 rounded-lg">
             <DialogTitle className="font-bold text-2xl">
               Add a bookmark
             </DialogTitle>
@@ -65,7 +65,7 @@ export default function AddBookmark() {
                   ref={titleRef}
                   minLength={2}
                   required
-                  className="h-10 border px-2 border-neutral-300 rounded-lg data-hover:shadow"
+                  className="h-10 border px-2 border-neutral-300 dark:border-neutral-500 dark:bg-neutral-600 rounded-lg data-hover:shadow"
                 />
               </div>
               <div className="flex flex-col gap-1.5">
@@ -84,7 +84,7 @@ export default function AddBookmark() {
                   required
                   minLength={10}
                   maxLength={280}
-                  className="border px-2 border-neutral-300 rounded-lg data-hover:shadow"
+                  className="border px-2 border-neutral-300 rounded-lg dark:border-neutral-500 dark:bg-neutral-600 data-hover:shadow"
                 />
               </div>
               <div className="flex flex-col gap-1.5">
@@ -97,7 +97,7 @@ export default function AddBookmark() {
                   id="new_website"
                   ref={urlRef}
                   required
-                  className="h-10 border px-2 border-neutral-300 rounded-lg data-hover:shadow"
+                  className="h-10 border px-2 border-neutral-300 dark:border-neutral-500 dark:bg-neutral-600 rounded-lg data-hover:shadow"
                 />
               </div>
               <div className="flex flex-col gap-1.5">
@@ -110,7 +110,7 @@ export default function AddBookmark() {
                   minLength={2}
                   ref={tagsRef}
                   required
-                  className="h-10 border px-2 border-neutral-300 rounded-lg data-hover:shadow"
+                  className="h-10 border px-2 border-neutral-300 dark:border-neutral-500 dark:bg-neutral-600 rounded-lg data-hover:shadow"
                 />
               </div>
               <div className="flex gap-4 mt-3 self-end">

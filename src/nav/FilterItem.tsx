@@ -26,7 +26,7 @@ export default function FilterItem({
       <Checkbox
         checked={enabled}
         onChange={setEnabled}
-        className="group block size-4 rounded border bg-white data-checked:bg-neutral-800"
+        className="group block size-4 rounded border bg-white dark:bg-neutral-800 data-checked:bg-neutral-800"
       >
         <svg
           className="stroke-white opacity-0 group-data-checked:opacity-100"
@@ -42,7 +42,7 @@ export default function FilterItem({
         </svg>
       </Checkbox>
       <p className="font-semibold">{filter.key}</p>
-      <p className="px-2 py-0.5 rounded-full font-medium text-xs ml-auto bg-neutral-100">
+      <p className="px-2 py-0.5 rounded-full font-medium text-xs ml-auto bg-neutral-100 dark:bg-neutral-600">
         {filter.value}
       </p>
     </div>
