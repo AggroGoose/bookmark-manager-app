@@ -12,6 +12,7 @@ export default function BookmarkMenu({
   bookmark,
   setArchiveOpen,
   setEditOpen,
+  isLight,
 }: {
   bookmark:
     | {
@@ -42,6 +43,7 @@ export default function BookmarkMenu({
       };
   setArchiveOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isLight: boolean;
 }) {
   const dispatch = useAppDispatch();
   const handlePin = () => {
@@ -52,18 +54,20 @@ export default function BookmarkMenu({
   };
   return (
     <Menu>
-      <MenuButton className="p-1.5 border border-neutral-300 rounded-lg max-h-max hover:cursor-pointer hover:bg-neutral-100">
+      <MenuButton className="p-1.5 border border-neutral-300 dark:border-neutral-500 rounded-lg max-h-max hover:cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600">
         <IconMenuBookmark className="h-5 aspect-square" />
       </MenuButton>
       <MenuItems
         anchor={{ to: "bottom end", gap: "8px" }}
-        className="p-2 w-[200px] rounded-lg bg-white drop-shadow-lg"
+        className={`p-2 w-[200px] rounded-lg bg-white dark:bg-neutral-800 dark:text-white drop-shadow-lg${
+          isLight ? "" : " dark"
+        }`}
       >
         <MenuItem>
           <a
             href={bookmark.url}
             target="_blank"
-            className="flex py-2 items-center gap-2.5 w-full rounded-lg hover:bg-neutral-100"
+            className="flex py-2 items-center gap-2.5 w-full rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-600"
           >
             <IconVisit className="h-4" />
             <p className="font-semibold text-sm">Visit</p>
@@ -71,7 +75,7 @@ export default function BookmarkMenu({
         </MenuItem>
         <MenuItem>
           <button
-            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
             onClick={handleCopy}
           >
             <IconCopy className="h-4" bg="#fff" />
@@ -81,7 +85,7 @@ export default function BookmarkMenu({
         {!bookmark.pinned && (
           <MenuItem>
             <button
-              className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+              className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
               onClick={handlePin}
             >
               <IconPin className="h-4" />
@@ -92,7 +96,7 @@ export default function BookmarkMenu({
         {bookmark.pinned && (
           <MenuItem>
             <button
-              className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+              className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
               onClick={handlePin}
             >
               <IconPin className="h-4 rotate-45" />
@@ -102,7 +106,7 @@ export default function BookmarkMenu({
         )}
         <MenuItem>
           <button
-            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
             onClick={() => setEditOpen(true)}
           >
             <IconEdit className="h-4" bg="#fff" />
@@ -111,7 +115,7 @@ export default function BookmarkMenu({
         </MenuItem>
         <MenuItem>
           <button
-            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100"
+            className="flex w-full py-2 items-center gap-2.5 rounded-lg hover:cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-600"
             onClick={() => setArchiveOpen(true)}
           >
             <IconArchive className="h-4" />

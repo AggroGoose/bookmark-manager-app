@@ -15,7 +15,7 @@ function App() {
       <Sidebar />
       <main className="col-2 grid grid-rows-[78px_1fr] min-h-screen">
         <Header isLight={isLight} setIsLight={setIsLight} />
-        <Content />
+        <Content isLight={isLight} />
       </main>
     </div>
   );

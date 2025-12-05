@@ -12,6 +12,7 @@ export default function EditModal({
   editOpen,
   setEditOpen,
   bookmark,
+  isLight,
 }: {
   editOpen: boolean;
   setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,6 +43,7 @@ export default function EditModal({
         createdAt: string;
         lastVisited: null;
       };
+  isLight: boolean;
 }) {
   const [description, setDescription] = useState(bookmark.description);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -67,10 +69,10 @@ export default function EditModal({
     <Dialog
       open={editOpen}
       onClose={() => setEditOpen(false)}
-      className="relative z-50"
+      className={`relative z-50${isLight ? "" : " dark"}`}
     >
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-neutral-800/80">
-        <DialogPanel className="max-w-[570px] space-y-4 border bg-white p-8 rounded-lg">
+        <DialogPanel className="max-w-[570px] space-y-4 border bg-white dark:bg-neutral-800 dark:text-white p-8 rounded-lg">
           <DialogTitle className="font-bold text-2xl">
             Edit bookmark
           </DialogTitle>
@@ -144,7 +146,7 @@ export default function EditModal({
             <div className="flex gap-4 mt-3 self-end">
               <button
                 onClick={() => setEditOpen(false)}
-                className="font-semibold px-4 py-3 border border-neutral-300 hover:bg-neutral-300 hover:cursor-pointer rounded-lg"
+                className="font-semibold px-4 py-3 border border-neutral-300 hover:bg-neutral-300 dark:border-neutral-500 dark:hover:bg-neutral-500 hover:cursor-pointer rounded-lg"
               >
                 Cancel
               </button>
