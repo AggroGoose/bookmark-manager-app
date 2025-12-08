@@ -1,5 +1,6 @@
 import AddBookmark from "./AddBookmark";
 import Search from "./Search";
+import SideMenu from "./SideMenu";
 import UserMenu from "./userMenu";
 
 export default function Header({
@@ -10,8 +11,11 @@ export default function Header({
   setIsLight: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
-    <div className="w-full row-1 flex justify-between border-b px-8 py-4 border-neutral-200 dark:border-neutral-500 dark:bg-neutral-800 dark:text-white">
-      <Search />
+    <div className="w-full row-1 flex justify-between gap-4 border-b px-8 py-4 border-neutral-200 dark:border-neutral-500 dark:bg-neutral-800 dark:text-white">
+      <div className="flex gap-4">
+        <SideMenu isLight={isLight} />
+        <Search />
+      </div>
       <div className="flex gap-4 items-center">
         <AddBookmark isLight={isLight} />
         <UserMenu isLight={isLight} setIsLight={setIsLight} />

@@ -34,17 +34,17 @@ export default function AddBookmark({ isLight }: { isLight: boolean }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex gap-1 items-center text-white bg-teal-950 dark:bg-teal-800 font-semibold px-4 py-3 rounded-lg hover:cursor-pointer hover:drop-shadow-lg hover:bg-teal-800"
+        className="flex gap-1 items-center text-white bg-teal-950 dark:bg-teal-800 font-semibold px-3 md:px-4 py-3 rounded-lg hover:cursor-pointer hover:drop-shadow-lg hover:bg-teal-800"
       >
         <IconAdd className="h-5" />
-        <p className="">Add Bookmark</p>
+        <p className="max-md:hidden">Add Bookmark</p>
       </button>
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
         className={`relative z-50${isLight ? "" : " dark"}`}
       >
-        <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-neutral-800/80">
+        <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-neutral-800/80 overflow-y-scroll">
           <DialogPanel className="max-w-[570px] space-y-4 border bg-white dark:bg-neutral-800 dark:text-white p-8 rounded-lg">
             <DialogTitle className="font-bold text-2xl">
               Add a bookmark

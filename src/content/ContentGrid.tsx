@@ -6,7 +6,7 @@ export default function ContentGrid({ isLight }: { isLight: boolean }) {
     (state) => state.bookmarks.filteredBookmarks
   );
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8">
       {bookmarkItems.map((bookmark, i) => (
         <BookmarkCard bookmark={bookmark} key={i} isLight={isLight} />
       ))}

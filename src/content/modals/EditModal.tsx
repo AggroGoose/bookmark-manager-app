@@ -71,7 +71,7 @@ export default function EditModal({
       onClose={() => setEditOpen(false)}
       className={`relative z-50${isLight ? "" : " dark"}`}
     >
-      <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-neutral-800/80">
+      <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-neutral-800/80 overflow-y-scroll">
         <DialogPanel className="max-w-[570px] space-y-4 border bg-white dark:bg-neutral-800 dark:text-white p-8 rounded-lg">
           <DialogTitle className="font-bold text-2xl">
             Edit bookmark

@@ -18,7 +18,7 @@ export default function Search() {
   };
 
   return (
-    <div className="w-[320px] bg-neutral-100 dark:bg-neutral-600 rounded-lg flex relative p-3 gap-2">
+    <div className="max-w-[320px] w-full md:w-[320px] bg-neutral-100 dark:bg-neutral-600 rounded-lg flex relative p-3 gap-2">
       <IconSearch className="h-5" />
       <input
         className="w-full"

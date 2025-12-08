@@ -80,7 +80,7 @@ export default function BookmarkCard({
         </div>
         <hr className="border-neutral-300 dark:border-neutral-500" />
         <p className="font-medium text-sm">{bookmark.description}</p>
-        <div className="flex gap-2 mt-auto">
+        <div className="flex gap-2 mt-auto flex-wrap">
           {bookmark.tags.map((tag, i) => (
             <p
               className="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-600 rounded-md"

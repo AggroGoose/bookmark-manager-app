@@ -22,7 +22,7 @@ export default function FilterItem({
     }
   }, [enabled, dispatch, filter.key]);
   return (
-    <div className="flex gap-2 items-center px-3 py-2">
+    <div className="flex gap-2 items-center px-3 py-2 hover:bg-neutral-100 rounded-lg">
       <Checkbox
         checked={enabled}
         onChange={setEnabled}

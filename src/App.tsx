@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div
-      className={`grid grid-cols-[296px_1fr] font-sans${
+      className={`grid grid-cols-1 xl:grid-cols-[296px_1fr] font-sans${
         !isLight ? " dark" : ""
       }`}
     >

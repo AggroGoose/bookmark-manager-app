@@ -20,8 +20,8 @@ export default function UserMenu({
 }) {
   return (
     <Menu>
-      <MenuButton className="hover:cursor-pointer hover:outline-2 rounded-full">
-        <img src={avatar} className="h-10" />
+      <MenuButton className="size-10 hover:cursor-pointer hover:outline-2 rounded-full">
+        <img src={avatar} className="size-10" />
       </MenuButton>
       <MenuItems
         anchor={{ to: "bottom end", gap: "8px" }}
