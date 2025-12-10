@@ -201,7 +201,7 @@ const bookmarkSlice = createSlice({
           id: state.nextId,
           createdAt: new Date().toDateString(),
           description: a.description,
-          favicon: "/src/assets/images/favicon-frontend-mentor.png",
+          favicon: "/favicon-frontend-mentor.png",
           isArchived: false,
           lastVisited: null,
           pinned: false,
