@@ -5,7 +5,6 @@ import {
   MenuItems,
   Switch,
 } from "@headlessui/react";
-import avatar from "../assets/images/image-avatar.webp";
 import IconLogout from "../assets/SVG/IconLogout";
 import IconTheme from "../assets/SVG/IconTheme";
 import IconDarkTheme from "../assets/SVG/IconDarkTheme";
@@ -21,7 +20,7 @@ export default function UserMenu({
   return (
     <Menu>
       <MenuButton className="size-10 hover:cursor-pointer hover:outline-2 rounded-full">
-        <img src={avatar} className="size-10" />
+        <img src={"/image-avatar.webp"} className="size-10" />
       </MenuButton>
       <MenuItems
         anchor={{ to: "bottom end", gap: "8px" }}
@@ -31,7 +30,7 @@ export default function UserMenu({
       >
         <MenuItem>
           <div className="flex gap-3 items-center px-4 py-3 border-b border-b-neutral-300 dark:border-b-neutral-500">
-            <img src={avatar} className="h-10" />
+            <img src={"/image-avatar.webp"} className="h-10" />
             <div className="flex flex-col">
               <p className="text-sm font-semibold">Emily Carter</p>
               <p className="text-sm font-medium">emily101@gmail.com</p>
